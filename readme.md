@@ -9,5 +9,5 @@ Features:
 - [x] Implement routing
 
 Todo:
-- [ ]  Build as desktop app using Electron
+- [ ] Build as desktop app using Electron
 - [ ] Store data in cloud service
