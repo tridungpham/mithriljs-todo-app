@@ -24,6 +24,11 @@ Task.prototype.getDoneTime = function () {
     return this.done ? this.doneTime.toString() : '';
 }
 
+Task.prototype.markDone = function () {
+    this.done = true;
+    this.doneTime = new Date();
+}
+
 Task.fromObj = function (data) {
     let task = new Task;
     Object.assign(task, data);
@@ -43,11 +48,17 @@ const Tasks = {
         return this.data;
     },
 
+    activeItems() {
+        return this.items().filter(item => !item.done);
+    },
+
+    completedItems() {
+        return this.items().filter(item => item.done);
+    },
+
     push(description) {
         this.data.push(new Task(description));
         this.__write();
-
-        // console.log(this.data);
     },
 
     toggle(item) {
@@ -60,7 +71,15 @@ const Tasks = {
         }
     },
 
-    remove: function (item) {
+    markAllAsDone() {
+        this.data.forEach((item) => {
+            item.markDone();
+        });
+
+        this.__write();
+    },
+
+    remove(item) {
         let currentLength = this.data.length;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -74,12 +93,20 @@ const Tasks = {
         return currentLength != this.data.length;
     },
 
+    removeCompletedTasks() {
+        this.completedItems().map((item) => this.remove(item));
+    },
+
     total() {
         return this.items().length;
     },
 
     countDone() {
         return this.items().filter(item => item.done).length;
+    },
+
+    countUncompleted() {
+        return this.items().filter(item => !item.done).length;
     },
 
     __write() {
@@ -96,5 +123,7 @@ const Tasks = {
         }
     }
 }
+
+Tasks.__read();
 
 module.exports = { Task, Tasks }
