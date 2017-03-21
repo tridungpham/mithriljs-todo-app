@@ -2,6 +2,7 @@ const m = require('mithril');
 const stream = require('mithril/stream');
 const Tasks = require('../../models/Task').Tasks;
 
+const ENTER_KEY = 13;
 
 module.exports = {
     data: stream(''),
@@ -11,7 +12,7 @@ module.exports = {
     },
 
     onKeyUp(event) {
-        if (event.keyCode == 13) {
+        if (event.keyCode == ENTER_KEY) {
             Tasks.push(this.data());
             this.resetInput();
         }
