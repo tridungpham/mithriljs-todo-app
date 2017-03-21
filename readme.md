@@ -1,10 +1,13 @@
 ### TODO App
 
 This is my experiment with Mithril.js 1.x
+
 Features:
-- Create/remove/toggle task.
-- Store data in `localStorage`
+- [x] Create/remove/toggle task.
+- [x] Store data in `localStorage`
+- [x] Use [TodoApp](https://github.com/tastejs/todomvc-app-template) base template
+- [x] Implement routing
 
 Todo:
-- Build as desktop app using Electron
-- Store data in cloud service
+- [ ]  Build as desktop app using Electron
+- [ ] Store data in cloud service
